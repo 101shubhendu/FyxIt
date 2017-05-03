@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Location;
 use App\Post;
 use App\Tag;
 use Illuminate\Support\Facades\Session;
@@ -58,12 +59,12 @@ class PostController extends Controller
 
         // store in the database
         $post = new Post;
-
         $post->title = $request->title;
         $post->slug = $request->slug;
         $post->category_id = $request->category_id;
         $post->user_id = $request->user()->id;
         $post->body = Purifier::clean($request->body);
+
 
         if ($request->hasFile('featured_img')) {
             $image = $request->file('featured_img');
@@ -73,8 +74,14 @@ class PostController extends Controller
 
             $post->image = $filename;
         }
-
         $post->save();
+        $location = new Location;
+        $location->area = $request->area;
+        $location->lat = $request->lat;
+        $location->lng = $request->lng;
+        $location->post_id = $post->id;
+        $location->save();
+
 
         $post->tags()->sync($request->tags, false);
 
@@ -164,6 +171,12 @@ class PostController extends Controller
         } else {
             $post->tags()->sync(array());
         }
+        $location = $post->location;
+        $location->area = $request->area;
+        $location->lat = $request->lat;
+        $location->lng = $request->lng;
+        $location->post_id = $post->id;
+        $location->save();
 
 
         // set flash data with success message

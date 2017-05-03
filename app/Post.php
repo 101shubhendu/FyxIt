@@ -37,5 +37,9 @@ class Post extends Model
 
         return (! is_null($like)) ? true : false;
     }
+    public function location(){
+        return $this->hasOne('App\Location');
+
+    }
 
 }

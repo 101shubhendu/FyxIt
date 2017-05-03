@@ -37,6 +37,7 @@ class PostApiController extends Controller
                 $post['can_edit'] = "false";
 
             }
+            $post['location'] = $post->location;
             $post['is_liked'] = $post->isLiked;
             $post['image'] = '139.59.79.241/images/'.$post['image'];
         }
@@ -95,6 +96,12 @@ class PostApiController extends Controller
         }
 
         $post->save();
+        $location = new Location;
+        $location->area = $request->area;
+        $location->lat = $request->lat;
+        $location->lng = $request->lng;
+        $location->post_id = $post->id;
+        $location->save();
 
         $post->tags()->sync($request->tags, false);
         return Response::json([
@@ -210,6 +217,12 @@ class PostApiController extends Controller
             $post->tags()->sync($request->tags, false);
         }
         $post->save();
+        $location = $post->location;
+        $location->area = $request->area;
+        $location->lat = $request->lat;
+        $location->lng = $request->lng;
+        $location->post_id = $post->id;
+        $location->save();
 
 
         return Response::json([
