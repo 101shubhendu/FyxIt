@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Comment;
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
 
@@ -36,6 +37,7 @@ class CommentsApiController extends Controller
         $comment->email = $request->email;
         $comment->comment = $request->comment;
         $comment->approved = true;
+        $comment->user_id = Auth::id();
         $comment->post()->associate($post);
 
         $comment->save();
@@ -49,6 +51,7 @@ class CommentsApiController extends Controller
         foreach ($comments as $comment){
             $comment['likes_count'] = $comment->likes()->count();
             $comment['is_liked'] = $comment->isLiked;
+            var_dump($comment->user_id);
             if(Auth::id() == $comment->user_id){
                 $comment['can_edit'] = "true";
             }
