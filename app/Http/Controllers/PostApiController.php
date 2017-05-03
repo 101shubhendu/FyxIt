@@ -6,6 +6,7 @@ use App\Category;
 use App\Post;
 use App\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
@@ -29,6 +30,13 @@ class PostApiController extends Controller
             $post->comments_count;
             $post->likes_count;
             $post['user']['name'];
+            if(Auth::id() == $post->user_id){
+                $post['can_edit'] = "true";
+            }
+            else{
+                $post['can_edit'] = "false";
+
+            }
             $post['is_liked'] = $post->isLiked;
             $post['image'] = '139.59.79.241/images/'.$post['image'];
         }
