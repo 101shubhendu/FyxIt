@@ -23,11 +23,16 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token','created_at','updated_at'
     ];
 
 //    $user = App\User::find(1);
 //    $token = $user->createToken('Token Name')->accessToken;
+
+    public function posts() {
+
+        return $this->hasMany('App\Post');
+    }
 
     public function likedPosts()
     {

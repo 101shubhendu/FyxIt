@@ -28,7 +28,8 @@ class PostApiController extends Controller
         foreach ($posts as $post){
             $post->comments_count;
             $post->likes_count;
-
+            $post['user']['name'];
+            $post['image'] = '139.59.79.241/images/'.$post['image'];
         }
 //        foreach ($posts as $post) {
 //            $this->transform($post);
@@ -72,6 +73,7 @@ class PostApiController extends Controller
         $post->title = $request->title;
         $post->slug = $request->slug;
         $post->category_id = $request->category_id;
+        $post->user_id = $request->user_id;
         $post->body = Purifier::clean($request->body);
 
         if ($request->hasFile('featured_img')) {
@@ -119,10 +121,12 @@ class PostApiController extends Controller
     private function transform($post){
         return [
             'post_id' => $post['id'],
+            'posted_by' => $post['user']['name'],
+            'user_id' => $post['user']['id'],
             'body' => $post['body'],
             'title' => $post['title'],
             'slug' => $post['slug'],
-            'image_url' => $post['image'],
+            'image_url' => '139.59.79.241/images/'.$post['image'],
             'tags'=> $post['tags'],
             'category'=> $post['category'],
             'likes' => $post['likes']->count(),
@@ -214,6 +218,8 @@ class PostApiController extends Controller
     {
         $post = Post::find($id);
         $post->tags()->detach();
+        $post->comments()->detach();
+        $post->user()->detach();
         Storage::delete($post->image);
 
         $post->delete();
