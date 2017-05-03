@@ -49,6 +49,13 @@ class CommentsApiController extends Controller
         foreach ($comments as $comment){
             $comment['likes_count'] = $comment->likes()->count();
             $comment['is_liked'] = $comment->isLiked;
+            if(Auth::id() == $comment->user_id){
+                $comment['can_edit'] = "true";
+            }
+            else{
+                $comment['can_edit'] = "false";
+
+            }
 
         }
         return Response::json([
