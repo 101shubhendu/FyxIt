@@ -62,6 +62,7 @@ class PostController extends Controller
         $post->title = $request->title;
         $post->slug = $request->slug;
         $post->category_id = $request->category_id;
+        $post->user_id = $request->user()->id;
         $post->body = Purifier::clean($request->body);
 
         if ($request->hasFile('featured_img')) {
