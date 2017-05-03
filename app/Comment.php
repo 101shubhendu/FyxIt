@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
 class Comment extends Model
-{   protected $hidden = ['approved','post_id'];
+{   protected $hidden = ['approved','post_id','pivot','id'];
     public function post()
     {
         return $this->belongsTo('App\Post');

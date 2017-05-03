@@ -47,7 +47,8 @@ class CommentsApiController extends Controller
     public function show($id){
         $comments = Post::find($id)->comments;
         foreach ($comments as $comment){
-        $comment['likes'] = $comment->likes();
+            $comment['likes_count'] = $comment->likes()->count();
+
         }
         return Response::json([
             'comments' => $comments,

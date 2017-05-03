@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Like extends Model
-{    protected $hidden = array('created_at','updated_at','pivot','id');
+{    protected $visible = ['id','name','email'];
     use SoftDeletes;
     protected $table = 'likeables';
     protected $fillable = [

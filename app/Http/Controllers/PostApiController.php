@@ -29,6 +29,7 @@ class PostApiController extends Controller
             $post->comments_count;
             $post->likes_count;
             $post['user']['name'];
+            $post['is_liked'] = $post->isLiked;
             $post['image'] = '139.59.79.241/images/'.$post['image'];
         }
 //        foreach ($posts as $post) {
