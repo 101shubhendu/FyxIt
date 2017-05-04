@@ -27,7 +27,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('feed', ['uses' => 'FeedController@getIndex', 'as' => 'feed.index']);
     Route::get('post/like/{id}', ['as' => 'post.like', 'uses' => 'LikeController@likePost']);
     Route::get('comment/like/{id}', ['as' => 'comment.like', 'uses' => 'LikeController@likeComment']);
-    Route::get('profile/{user_id}',['as' =>'user.profile','uses' => 'ProfileController@show']);
+    Route::get('profile/{user_id}',['as' =>'user.show','uses' => 'ProfileController@show']);
     Route::get('profile/',['as' =>'user.profile','uses' => 'ProfileController@index']);
     Route::put('profile/{user_id}',['as' =>'user.update','uses' => 'ProfileController@update']);
     Route::get('profile/{user_id}',['as' =>'user.edit','uses' => 'ProfileController@edit']);

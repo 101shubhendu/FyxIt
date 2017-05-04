@@ -5,15 +5,15 @@
 
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <img src="{{asset('/images/' . $user->image)}}" width="800" height="400" />
-            <h1>{{ $user->name }}</h1>
-            <p>{!! $user->email !!}</p>
+            <img src="{{asset('/images/' . $profile->image)}}" width="800" height="400" />
+            <h1>{{ $profile->name }}</h1>
+            <p>{!! $profile->email !!}</p>
             <hr>
-            <p>Located In: {{ $user->address }}</p>
+            <p>Located In: {{ $profile->address }}</p>
         </div>
-    @if(Auth::id() == $user->id)
+    @if(Auth::id() == $profile->id)
     <div class="col-md-2">
-        <a href="{{ route('user.edit',$user->id) }}" class="btn btn-lg btn-block btn-primary btn-h1-spacing">Edit</a>
+        <a href="{{ route('user.edit',$profile->id) }}" class="btn btn-lg btn-block btn-primary btn-h1-spacing">Edit</a>
     </div>
     @endif
     </div>

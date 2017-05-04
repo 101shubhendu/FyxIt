@@ -22,9 +22,9 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        $user = User::find(Auth::id());
-        $posts = $user->posts;
-        return view('users.profile')->with('user',$user)->with('posts',$posts);
+        $profile = User::find(Auth::id());
+        $posts = $profile->posts;
+        return view('users.profile')->with('profile',$profile)->with('posts',$posts);
 
     }
 
@@ -47,9 +47,9 @@ class ProfileController extends Controller
      */
     public function show($id)
     {
-        $user = User::find($id);
-        $posts = $user->posts;
-        return view('users.profile')->with('user',$user)->with('posts',$posts);
+        $profile = User::find($id);
+        $posts = $profile->posts;
+        return view('users.profile')->with('profile',$profile)->with('posts',$posts);
 
     }
 
