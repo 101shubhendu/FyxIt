@@ -7,6 +7,7 @@ use App\Location;
 use App\Post;
 use App\Tag;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Mews\Purifier\Facades\Purifier;
 use Intervention\Image\Facades\Image;
 use Illuminate\Http\Request;
