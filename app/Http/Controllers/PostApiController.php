@@ -249,11 +249,15 @@ class PostApiController extends Controller
     {
         $post = Post::find($id);
         $post->tags()->detach();
-        $post->comments()->detach();
-        $post->user()->detach();
         Storage::delete($post->image);
-
+        $location = $post->location;
+        $comments = $post->comments;
+        $location->delete();
+        foreach($comments as $comment) {
+            $comment->delete();
+        }
         $post->delete();
+
 
         return Response::json([
             'message'=>'post successfully deleted'

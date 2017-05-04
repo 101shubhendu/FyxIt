@@ -210,7 +210,9 @@ class PostController extends Controller
         $location = $post->location;
         $comments = $post->comments;
         $location->delete();
-        $comments->delete();
+        foreach($comments as $comment) {
+            $comment->delete();
+        }
         $post->delete();
 
         Session::flash('success', 'The post was successfully deleted.');
