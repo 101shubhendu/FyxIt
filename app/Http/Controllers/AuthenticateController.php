@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
@@ -38,9 +39,10 @@ class AuthenticateController extends Controller
             // something went wrong
             return response()->json(['error' => 'could_not_create_token'], 500);
         }
-
+        $user = User::find(Auth::id());
+        $user->location;
         // if no errors are encountered we can return a JWT
-        return response()->json(compact('token'));
+        return response()->json([compact('token'),$user]);
     }
 
     public function getAuthenticatedUser()
