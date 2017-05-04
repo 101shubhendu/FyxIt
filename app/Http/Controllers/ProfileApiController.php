@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,6 +27,22 @@ class ProfileApiController extends Controller
         $user = User::find(Auth::id());
         $user['image'] = "139.59.79.241/images/".$user['image'];
         $posts = $user->posts;
+        foreach ($posts as $post){
+            $post['comments_count'] = $post->comments()->count();
+            $post['likes_count'] = $post->likes()->count();
+            $post['location'] = $post->location;
+            $post['is_liked'] = $post->isLiked;
+            $post->category;
+            $post->tags;
+            $post['image'] = '139.59.79.241/images/'.$post['image'];
+            if(Auth::id() == $user->id){
+                $post['can_edit'] = "true";
+            }
+            else{
+                $post['can_edit'] = "false";
+
+            }
+        }
         if(Auth::id() == $user->id){
             $user['can_edit'] = "true";
         }
@@ -35,7 +52,6 @@ class ProfileApiController extends Controller
         }
         return Response::json([
             'profile' => $user,
-            'timeline' =>$posts
         ]);
     }
 
@@ -61,6 +77,22 @@ class ProfileApiController extends Controller
         $user = User::find($id);
         $user['image'] = "139.59.79.241/images/".$user['image'];
         $posts = $user->posts;
+        foreach ($posts as $post){
+            $post['comments_count'] = $post->comments()->count();
+            $post['likes_count'] = $post->likes()->count();
+            $post['location'] = $post->location;
+            $post['is_liked'] = $post->isLiked;
+            $post->category;
+            $post->tags;
+            $post['image'] = '139.59.79.241/images/'.$post['image'];
+            if(Auth::id() == $user->id){
+                $post['can_edit'] = "true";
+            }
+            else{
+                $post['can_edit'] = "false";
+
+            }
+        }
         if(Auth::id() == $user->id){
             $user['can_edit'] = "true";
         }
@@ -70,7 +102,6 @@ class ProfileApiController extends Controller
         }
         return Response::json([
             'profile' => $user,
-            'timeline' =>$posts
         ]);
     }
 

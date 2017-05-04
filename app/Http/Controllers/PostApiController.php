@@ -38,6 +38,8 @@ class PostApiController extends Controller
                 $post['can_edit'] = "false";
 
             }
+            $post->category;
+            $post->tags;
             $post['location'] = $post->location;
             $post['is_liked'] = $post->isLiked;
             $post['image'] = '139.59.79.241/images/'.$post['image'];
