@@ -164,7 +164,15 @@ class PostController extends Controller
         $post->slug = $request->input('slug');
         $post->category_id = $request->input('category_id');
         $post->body = Purifier::clean($request->input('body'));
-
+        if ($request->hasFile('featured_image')) {
+            $image = $request->file('featured_image');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $location = public_path('images/' . $filename);
+            Image::make($image)->resize(800, 400)->save($location);
+            $oldFileName = $post->image;
+            $post->image = $filename;
+            Storage::delete($oldFileName);
+        }
         $post->save();
 
         if (isset($request->tags)) {

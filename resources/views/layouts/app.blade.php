@@ -69,6 +69,9 @@
                                         <a href="{{ url('/feed') }}">
                                             Feed
                                         </a>
+                                        <a href="{{ url('/profile') }}">
+                                            Profile
+                                        </a>
                                         <a href="{{ url('/categories') }}">
                                             Category
                                         </a>

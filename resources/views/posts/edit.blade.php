@@ -26,7 +26,7 @@
 @section('content')
 
 	<div class="row">
-		{!! Form::model($post, ['route' => ['posts.update', $post->id], 'method' => 'PUT']) !!}
+		{!! Form::model($post, ['route' => ['posts.update', $post->id], 'method' => 'PUT','files'=> true]) !!}
 		<div class="col-md-8 col-md-offset-1">
 			{{ Form::label('title', 'Title:') }}
 			{{ Form::text('title', null, ["class" => 'form-control input-lg']) }}
@@ -42,6 +42,8 @@
 
 			{{ Form::label('body', "Body:", ['class' => 'form-spacing-top']) }}
 			{{ Form::textarea('body', null, ['class' => 'form-control']) }}
+			{{ Form::label('featured_img', 'Upload a Featured Image') }}
+			{{ Form::file('featured_img') }}
 			<h3>Add Location</h3>
 			<div class="form-group">
 				<label for="">Map</label>

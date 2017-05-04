@@ -28,7 +28,9 @@ Route::group(['middleware' => 'cors','prefix' => '/'], function()
     Route::get('comments/{post_id}', 'CommentsApiController@show');
     Route::put('comments/{id}', 'CommentsApiController@update');
     Route::delete('comments/{id}','CommentsApiController@destroy');
-
+    Route::get('profile/',['as' =>'user.profile','uses' => 'ProfileApiController@index']);
+    Route::put('profile/{user_id}',['as' =>'user.update','uses' => 'ProfileApiController@update']);
+    Route::get('profile/{user_id}',['as' =>'user.profile','uses' => 'ProfileApiController@show']);
 
 });
 //Route::get('/user', function (Request $request) {
