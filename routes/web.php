@@ -30,7 +30,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('profile/{user_id}',['as' =>'user.show','uses' => 'ProfileController@show']);
     Route::get('profile/',['as' =>'user.profile','uses' => 'ProfileController@index']);
     Route::put('profile/{user_id}',['as' =>'user.update','uses' => 'ProfileController@update']);
-    Route::get('profile/{user_id}',['as' =>'user.edit','uses' => 'ProfileController@edit']);
+    Route::get('profile/edit/{user_id}',['as' =>'user.edit','uses' => 'ProfileController@edit']);
 
 });
 

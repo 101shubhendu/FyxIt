@@ -22,7 +22,7 @@
 				<a href="{{ route('post.like', $post->id) }}">Like</a>
 			@endif
 			@foreach ($post->likes as $user)
-                <a href="{{ route('user.profile', $user->id) }}">{{ $user->name }}</a>
+                <a href="{{ route('user.show', $user->id) }}">{{ $user->name }}</a>
                 ,
 			@endforeach likes this !
 			<hr>
@@ -59,7 +59,7 @@
 						@endif
 					</div>
 					@foreach ($comment->likes as $user)
-                        <a href="{{ route('user.profile', $user->id) }}">{{ $user->name }}</a>
+                        <a href="{{ route('user.show', $user->id) }}">{{ $user->name }}</a>
 					@endforeach likes this !
 
 				</div>

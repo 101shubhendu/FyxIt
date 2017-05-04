@@ -49,7 +49,7 @@ class ProfileController extends Controller
     {
         $profile = User::find($id);
         $posts = $profile->posts;
-        return view('users.profile')->with('profile',$profile)->with('posts',$posts);
+        return view('users.show')->with('profile',$profile)->with('posts',$posts);
 
     }
 

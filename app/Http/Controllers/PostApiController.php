@@ -80,12 +80,12 @@ class PostApiController extends Controller
 
         // store in the database
         $post = new Post;
-
         $post->title = $request->title;
         $post->slug = $request->slug;
         $post->category_id = $request->category_id;
-        $post->user_id = $request->user_id;
+        $post->user_id = $request->user()->id;
         $post->body = Purifier::clean($request->body);
+
 
         if ($request->hasFile('featured_img')) {
             $image = $request->file('featured_img');
@@ -95,7 +95,6 @@ class PostApiController extends Controller
 
             $post->image = $filename;
         }
-
         $post->save();
         $location = new Location;
         $location->area = $request->area;
