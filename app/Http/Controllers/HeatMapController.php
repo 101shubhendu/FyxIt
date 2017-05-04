@@ -3,14 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Location;
-use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 
-class HeatMapApiController extends Controller
+class HeatMapController extends Controller
 {
     public function __construct() {
-        $this->middleware('jwt.auth');
+        $this->middleware('auth');
     }
 
 
@@ -23,26 +22,25 @@ class HeatMapApiController extends Controller
         else{
             $locations = Location::all();
         }
-        return Response::json([
-            'locations'=> $locations
-        ]);
+        return view('map.heat')->with('locations',$locations);
+
 
     }
     public function posts(Request $request)
     {
         $search_term = $request->input('search');
-
-        $locations = Location::where('area', 'LIKE', '%' . $search_term . '%')->get();
-
-        foreach ($locations as $location){
-            $post = $location->post;
-            $post['image'] = '139.59.79.241/images/'.$post['image'];
+        if($search_term) {
+            $locations = Location::where('area', 'LIKE', '%' . $search_term . '%')->get();
+            foreach ($locations as $location){
+                $post = $location->post;
+                $post['image'] = '139.59.79.241/images/'.$post['image'];
+            }
+            return view('map.nearby')->with('locations',$locations);
+        }
+        else{
+            return view('map.nearby')->with('locations',false);
         }
 
-        return Response::json([
-            'near_by_posts'=> $locations
-        ]);
 
     }
-
 }

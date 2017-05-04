@@ -81,6 +81,12 @@
                                         <a href="{{url('/tags')}}" >
                                             Tags
                                         </a>
+                                        <a href="{{url('/map')}}" >
+                                            Heat Map
+                                        </a>
+                                        <a href="{{url('/map/posts')}}" >
+                                            Search
+                                        </a>
 
                                         <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
