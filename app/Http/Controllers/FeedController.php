@@ -19,8 +19,9 @@ class FeedController extends Controller
     public function getSingle($slug) {
         // fetch from the DB based on slug
         $post = Post::where('slug', '=', $slug)->first();
+        $location = $post->location;
 
         // return the view and pass in the post object
-        return view('feed.single')->with('post',$post);
+        return view('feed.single')->with('post',$post)->with('location',$location);
     }
 }

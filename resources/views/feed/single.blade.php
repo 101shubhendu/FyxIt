@@ -80,5 +80,45 @@
 			{{ Form::close() }}
 		</div>
 	</div>
+@endsection
 
+@section('scripts')
+	<script async defer
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCno458WmFmeRpV7ON1EqcHcZkbBbCBEyU&libraries=places&callback=initialize" type="text/javascript">
+	</script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script>
+	function initialize() {
+
+	var loc = {lat: 28.70, lng: 77.10};
+	var map = new google.maps.Map(document.getElementById('map-canvas'), {
+	zoom: 15,
+	center: loc
+	});
+	var marker = new google.maps.Marker({
+	position: loc,
+	map: map,
+	draggable: true
+	});
+
+	var searchBox = new google.maps.places.SearchBox(document.getElementById('searchmap'));
+	google.maps.event.addListener(searchBox, 'places_changed', function () {
+	var places = searchBox.getPlaces();
+	var bounds = new google.maps.LatLngBounds();
+	var i, place;
+	for (i = 0; place = places[i]; i++) {
+	bounds.extend(place.geometry.location);
+	marker.setPosition(place.geometry.location);
+	}
+	map.fitBounds(bounds);
+	map.setZoom(15);
+	});
+	google.maps.event.addListener(marker, 'position_changed', function () {
+	var lat = marker.getPosition().lat();
+	var lng = marker.getPosition().lng();
+	$('#lat').val(lat);
+	$('#lng').val(lng);
+	});
+	}
+	</script>
 @endsection
