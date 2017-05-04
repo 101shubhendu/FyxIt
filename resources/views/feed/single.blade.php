@@ -1,7 +1,14 @@
 @extends('layouts.app')
 <?php $titleTag = htmlspecialchars($post->title); ?>
 @section('title', "| $titleTag")
-
+@section('stylesheets')
+    <style>
+        #map-canvas{
+            width: 350px;
+            height: 250px;
+        }
+    </style>
+    @endsection
 @section('content')
 
 	<div class="row">
@@ -21,6 +28,11 @@
 			<p>Posted In: {{ $post->category->name }}</p>
 		</div>
 	</div>
+    <div class="col-md-8 col-md-offset-2">
+        <h3>{{  "Location:" }}</h3>
+        <h3>{{ $location->area }}</h3>
+        <div id="map-canvas"></div>
+    </div>
 
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
@@ -88,37 +100,26 @@
 	</script>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script>
+
 	function initialize() {
 
-	var loc = {lat: 28.70, lng: 77.10};
-	var map = new google.maps.Map(document.getElementById('map-canvas'), {
-	zoom: 15,
-	center: loc
-	});
-	var marker = new google.maps.Marker({
-	position: loc,
-	map: map,
-	draggable: true
-	});
+        var lat = {{ $location->lat }};
+        var lng = {{ $location->lng }};
 
-	var searchBox = new google.maps.places.SearchBox(document.getElementById('searchmap'));
-	google.maps.event.addListener(searchBox, 'places_changed', function () {
-	var places = searchBox.getPlaces();
-	var bounds = new google.maps.LatLngBounds();
-	var i, place;
-	for (i = 0; place = places[i]; i++) {
-	bounds.extend(place.geometry.location);
-	marker.setPosition(place.geometry.location);
-	}
-	map.fitBounds(bounds);
-	map.setZoom(15);
-	});
-	google.maps.event.addListener(marker, 'position_changed', function () {
-	var lat = marker.getPosition().lat();
-	var lng = marker.getPosition().lng();
-	$('#lat').val(lat);
-	$('#lng').val(lng);
-	});
+        var map = new google.maps.Map(document.getElementById('map-canvas'), {
+            zoom: 15,
+            center:{
+                lat: lat,
+                lng: lng
+            }
+        });
+        var marker = new google.maps.Marker({
+            position: {
+                lat: lat,
+                lng: lng
+            },
+            map: map,
+        });
 	}
 	</script>
 @endsection

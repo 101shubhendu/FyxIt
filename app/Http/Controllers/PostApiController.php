@@ -120,6 +120,7 @@ class PostApiController extends Controller
     public function show($id)
     {
         $post = Post::find($id);
+        $post->location;
         if(!$post){
             return Response::json([
                 'error' => [
@@ -147,8 +148,10 @@ class PostApiController extends Controller
             'category'=> $post['category'],
             'likes' => $post['likes']->count(),
             'comments' => $post['comments']->count(),
+            'location'=> $post->location,
             'created_at' => $post['created_at'],
             'updated_at' => $post['updated_at']
+
         ];
     }
 
