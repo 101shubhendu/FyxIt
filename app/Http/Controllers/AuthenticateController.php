@@ -41,6 +41,7 @@ class AuthenticateController extends Controller
         }
         $user = User::find(Auth::id());
         $user->location;
+        $user['image'] = "139.59.79.241/images/".$user['image'];
         // if no errors are encountered we can return a JWT
         return response()->json([compact('token'),$user]);
     }
