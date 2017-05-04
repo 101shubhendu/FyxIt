@@ -248,14 +248,14 @@ class PostApiController extends Controller
     public function destroy($id)
     {
         $post = Post::find($id);
-//        $post->tags()->detach();
-//        Storage::delete($post->image);
-//        $location = $post->location;
-//        $comments = $post->comments;
-//        $location->delete();
-//        foreach($comments as $comment) {
-//            $comment->delete();
-//        }
+        $post->tags()->detach();
+        Storage::delete($post->image);
+        $location = $post->location;
+        $comments = $post->comments;
+        $location->delete();
+        foreach($comments as $comment) {
+            $comment->delete();
+        }
         $post->delete();
 
 
