@@ -249,8 +249,7 @@ class PostApiController extends Controller
     {
         $post = Post::find($id);
         $post->tags()->detach();
-        $post->comments()->delete();
-        $post->location()->delete();
+        $post->comments()->detach();
         $post->user()->detach();
         Storage::delete($post->image);
 

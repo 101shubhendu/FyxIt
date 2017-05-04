@@ -206,11 +206,11 @@ class PostController extends Controller
     {
         $post = Post::find($id);
         $post->tags()->detach();
-        $post->comments()->delete();
-        $post->location()->delete();
-        $post->user()->detach();
         Storage::delete($post->image);
-
+        $location = $post->location;
+        $comments = $post->comments;
+        $location->delete();
+        $comments->delete();
         $post->delete();
 
         Session::flash('success', 'The post was successfully deleted.');
