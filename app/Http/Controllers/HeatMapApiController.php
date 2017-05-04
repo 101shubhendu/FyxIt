@@ -3,12 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Location;
-use App\Tag;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Facades\Session;
 
-class TagApiController extends Controller
+class HeatMapApiController extends Controller
 {
     public function __construct() {
         $this->middleware('jwt.auth');
@@ -21,12 +18,9 @@ class TagApiController extends Controller
      */
     public function index()
     {
-        $tags = Tag::all();
-        return Response::json([
-            'Tags' => $tags
-        ], 200);
+      $locations = Location::all();
 //        $products = Location::where('area', 'LIKE', '%'.'Uttar Pradesh'.'%')->get();
-//        return $products;
+        return $locations;
 
     }
 

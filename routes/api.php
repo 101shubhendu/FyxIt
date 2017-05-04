@@ -31,6 +31,8 @@ Route::group(['middleware' => 'cors','prefix' => '/'], function()
     Route::get('profile/',['as' =>'user.profile','uses' => 'ProfileApiController@index']);
     Route::put('profile/{user_id}',['as' =>'user.update','uses' => 'ProfileApiController@update']);
     Route::get('profile/{user_id}',['as' =>'user.profile','uses' => 'ProfileApiController@show']);
+    Route::get('map/',['as' =>'map.all','uses' => 'HeatMapApiController@index']);
+
 
 });
 //Route::get('/user', function (Request $request) {
