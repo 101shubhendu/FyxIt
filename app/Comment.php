@@ -22,4 +22,7 @@ class Comment extends Model
 
         return (! is_null($like)) ? true : false;
     }
+    public function user(){
+        return $this->belongsTo('App\User');
+    }
 }

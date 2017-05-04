@@ -30,7 +30,6 @@ class PostApiController extends Controller
         foreach ($posts as $post){
             $post->comments_count;
             $post->likes_count;
-            $post['user']['name'];
             if(Auth::id() == $post->user_id){
                 $post['can_edit'] = "true";
             }
@@ -40,6 +39,7 @@ class PostApiController extends Controller
             }
             $post->category;
             $post->tags;
+            $post['user']['image'] = '139.59.79.241/images/'.$post['user']['image'];
             $post['location'] = $post->location;
             $post['is_liked'] = $post->isLiked;
             $post['image'] = '139.59.79.241/images/'.$post['image'];
@@ -142,6 +142,8 @@ class PostApiController extends Controller
             'post_id' => $post['id'],
             'posted_by' => $post['user']['name'],
             'user_id' => $post['user']['id'],
+            'user_image'=> '139.59.79.241/images/'.$post['user']['image'],
+            'user_address'=> $post['user']['address'],
             'body' => $post['body'],
             'title' => $post['title'],
             'slug' => $post['slug'],
