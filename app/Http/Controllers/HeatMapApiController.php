@@ -18,7 +18,7 @@ class HeatMapApiController extends Controller
     {
         $search_term = $request->search;
         if($search_term) {
-            $locations = Location::where('area', 'LIKE', '%' . $search_term . '%')->get();
+            $locations = Location::where('area', 'LIKE', "%$search_term%")->get();
         }
         else{
             $locations = Location::all();
@@ -32,7 +32,7 @@ class HeatMapApiController extends Controller
     {
         $search_term = $request->search;
 
-        $locations = Location::where('area', 'LIKE', '%' . $search_term . '%')->get();
+        $locations = Location::where('area', 'LIKE', "%$search_term%")->get();
 
         foreach ($locations as $location){
             $post = $location->post;
