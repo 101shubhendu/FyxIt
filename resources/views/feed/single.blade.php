@@ -44,7 +44,7 @@
 
 						<img src="{{ "https://www.gravatar.com/avatar/" . md5(strtolower(trim($comment->email))) . "?s=50&d=monsterid" }}" class="author-image">
 						<div class="author-name">
-							<h4>{{ $comment->name }}</h4>
+                            <h4><a href="{{ route('user.show', $comment->user_id) }}">{{ $comment->name }}</a></h4>
 							<p class="author-time">{{ date('F nS, Y - g:iA' ,strtotime($comment->created_at)) }}</p>
 						</div>
 
