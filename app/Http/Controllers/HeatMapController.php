@@ -14,8 +14,9 @@ class HeatMapController extends Controller
 
 
     public function index(Request $request)
-    { dd($request);
-        $search_term = $request->get('search');
+    {
+        $search_term = $request->all();
+        dd($search_term);
         if($search_term) {
             $locations = Location::where('area', 'LIKE', '%' . $search_term . '%')->get();
         }
@@ -27,8 +28,9 @@ class HeatMapController extends Controller
 
     }
     public function posts(Request $request)
-    { dd($request);
-        $search_term = $request->get('search');
+    {
+        $search_term = $request->all();
+        dd($search_term);
         if($search_term) {
             $locations = Location::where('area', 'LIKE', '%' . $search_term . '%')->get();
             foreach ($locations as $location){
