@@ -10,7 +10,7 @@
 @endsection
 @section('content')
     <div class="col-md-8 col-md-offset-2">
-        {!! Form::open(['method'=>'GET','url'=>'/map','class'=>'navbar-form navbar-left','role'=>'search'])  !!}
+        {!! Form::open(['method'=>'POST','url'=>'/map','class'=>'navbar-form navbar-left'])  !!}
 
         <div class="input-group custom-search-form">
             <input type="text" class="form-control" name="search" placeholder="Search...">

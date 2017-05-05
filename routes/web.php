@@ -33,6 +33,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('profile/edit/{user_id}',['as' =>'user.edit','uses' => 'ProfileController@edit']);
     Route::get('map',['as' =>'map.heat','uses' => 'HeatMapController@index']);
     Route::get('map/posts',['as' =>'map.nearby','uses' => 'HeatMapController@posts']);
+    Route::post('map/',['uses' => 'HeatMapController@index']);
+    Route::post('map/posts',['uses' => 'HeatMapController@posts']);
 
 });
 
