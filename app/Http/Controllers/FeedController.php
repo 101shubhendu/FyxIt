@@ -11,6 +11,7 @@ class FeedController extends Controller
         $this->middleware('auth');
     }
     public function getIndex() {
+//        $posts = Post::paginate(10);
         $posts = Post::paginate(10);
 
         return view('feed.index')->with('posts',$posts);
