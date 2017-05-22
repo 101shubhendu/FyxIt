@@ -26,7 +26,7 @@ class PostApiController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderBy('id', 'desc')->withCount('comments','likes')->paginate(20);
+        $posts = Post::orderBy('id', 'desc')->withCount('comments','likes')->paginate(10);
         foreach ($posts as $post){
             $post->comments_count;
             $post->likes_count;
