@@ -12,8 +12,16 @@
 */
 
 Route::get('/', function () {
-    return view('auth.login');
+    if(!Auth::check())
+    {   $message = '';
+        return view('auth.login')->with('message',$message);
+    }
+    return redirect()->action('FeedController@getIndex');
 });
+Route::get('register/verify/{confirmationCode}', [
+    'as' => 'confirmation_path',
+    'uses' => 'Auth\RegisterController@confirm'
+]);
 Route::group(['middleware' => ['web']], function () {
     Route::resource('categories', 'CategoryController');
     Route::resource('tags', 'TagController', ['except' => ['create']]);

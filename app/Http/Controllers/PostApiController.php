@@ -39,9 +39,9 @@ class PostApiController extends Controller
             }
             $post->category;
             $post->tags;
-//            $post['user_name'] = $post['user']['name'];
-            $post['user']['image'] = '139.59.79.241/images/'.$post['user']['image'];
-//            $post['user_address'] = $post['user']['address'];
+            $post['user_name'] = $post['user']['name'];
+            $post['user_image'] = '139.59.79.241/images/'.$post['user']['image'];
+            $post['user_address'] = $post['user']['address'];
             $post['location'] = $post->location;
             $post['is_liked'] = $post->isLiked;
             $post['image'] = '139.59.79.241/images/'.$post['image'];
