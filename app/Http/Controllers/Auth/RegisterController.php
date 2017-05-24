@@ -62,7 +62,7 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return User
      */
     protected function create(array $data)
     {   $confirmation_code = str_random(30);
@@ -75,8 +75,8 @@ class RegisterController extends Controller
         $when = Carbon::now()->addMinutes(1);
         Mail::to($data['email'])->later($when,new VerifyEmail($confirmation_code));
 
-        $message = 'Check your Email For Verification';
-        return view('auth.login')->with('message',$message);
+        return $user;
+
     }
     public function confirm($confirmation_code)
     {
