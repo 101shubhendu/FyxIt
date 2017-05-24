@@ -74,7 +74,11 @@ class RegisterController extends Controller
         ]);
         $when = Carbon::now()->addMinutes(1);
         Mail::to($data['email'])->later($when,new VerifyEmail($confirmation_code));
-
+        $user = [
+            'email' => $data['email'],
+            'password' => $data['password'],
+            'confirmed' => 1
+        ];
         return $user;
 
     }
